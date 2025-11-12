@@ -30,6 +30,12 @@ Some key features are:
 **How to thank me?**
 Just click on ⭐️ button or buy me a tea using the donation button below :)
 
+
+# How it looks
+
+![alt text](images/uploader.png "React JS File Uploader example")
+
+
 # Installation
 
 Install it from npm and include it in your React build process (using Webpack, Browserify, etc).
@@ -174,6 +180,12 @@ https://patreon.com/Jacware
 
 # Changelog
 
+### v0.7.0
+* Migrated from class component to functional component with hooks
+* Added support for array of file types in `accept` prop (e.g., `[".mp3", ".mp4", ".pdf"]`)
+* Updated to React 18 compatibility
+* Improved performance with modern React patterns
+* Enhanced documentation with custom UI examples
 
 ### v0.6.0
 * New customization options: render input, loader, container and limit text
