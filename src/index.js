@@ -104,7 +104,11 @@ class FileUploader extends Component {
   }
 
   renderInput() {
-    const accept = this.props.accept || "";
+    // Handle accept prop as either string or array
+    let accept = this.props.accept || "";
+    if (Array.isArray(accept)) {
+      accept = accept.join(',');
+    }
 
     if (this.props.renderInput) {
       return this.props.renderInput({
@@ -157,7 +161,10 @@ class FileUploader extends Component {
 FileUploader.propTypes = {
   title: PropTypes.string,
   uploadedFileCallback:  PropTypes.func.isRequired,
-  accept: PropTypes.string,
+  accept: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string)
+  ]), // e.g., ".mp3,.mp4,.pdf" or [".mp3", ".mp4", ".pdf", ".png", ".jpg"]
   onErrorCallback:  PropTypes.func,
   onAbortCallback:  PropTypes.func,
   titleCss: PropTypes.object,
@@ -165,7 +172,7 @@ FileUploader.propTypes = {
   isBinary: PropTypes.bool,
   byteLimit: PropTypes.number,
   maxFileSizeMB: PropTypes.number,
-  renderInput: PropTypes.func, // ({ onChange, accept }) => JSX
+  renderInput: PropTypes.func, // ({ onChange, accept }) => JSX - Customize the entire input UI (button, icon, etc.)
   renderLoader: PropTypes.func, // () => JSX
   renderLimitText: PropTypes.func, // (maxSizeMB) => JSX
   renderContainer: PropTypes.func, // (children) => JSX

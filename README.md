@@ -68,6 +68,55 @@ For example:
 />
 ```
 
+## Multiple File Types
+
+You can accept multiple file types by passing an array:
+
+```javascript
+<FileUploader
+  accept={[".mp3", ".mp4", ".pdf", ".png", ".jpg"]}
+  title="Upload media or documents"
+  uploadedFileCallback={e => {
+    this.handleUpload(e);
+  }}
+/>
+```
+
+## Custom UI
+
+Customize the upload button with icons or styled components using `renderInput`:
+
+```javascript
+<FileUploader
+  accept={[".png", ".jpg", ".jpeg"]}
+  uploadedFileCallback={(file) => console.log(file)}
+  renderInput={({ onChange, accept }) => (
+    <div>
+      <button 
+        onClick={() => document.getElementById("fileInput").click()}
+        style={{ 
+          padding: "10px 20px", 
+          background: "#007bff", 
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer"
+        }}
+      >
+        📁 Choose Image
+      </button>
+      <input
+        id="fileInput"
+        type="file"
+        accept={accept}
+        onChange={onChange}
+        style={{ display: "none" }}
+      />
+    </div>
+  )}
+/>
+```
+
 And then define the callback function
 
 ```javascript
@@ -100,7 +149,7 @@ Optionally you can handle errors with the following props:
 | ------------- |:-------------:| -----:|:-----|
 | title      | String | N | Title you want to have in the uploader |
 | uploadedFileCallback | Function callback     | Y|  Function to call on loaded data |
-| accept | String    | N|  Filter to determine what file types you want to upload |
+| accept | String or Array    | N|  Filter to determine what file types you want to upload (e.g., ".csv" or [".mp3", ".mp4", ".pdf", ".png", ".jpg"]) |
 | onErrorCallback | Function callback    | N|  Function to call on loading error |
 | onAbortCallback | Function callback    | N|  Function to call on loading abort |
 | titleCss | Object    | N|  Styling for title |
