@@ -69,11 +69,18 @@ class FileUploader extends Component {
         }
       };
 
-      if(this.props.isBinary){
+      // Detect if file is binary (video, audio, images, etc.)
+      const isBinaryFile = file.type.startsWith('video/') || 
+                          file.type.startsWith('audio/') || 
+                          file.type.startsWith('image/') ||
+                          this.props.isBinary;
+      
+      if(isBinaryFile){
         reader.readAsArrayBuffer(file);
       }
-      else
+      else {
         reader.readAsText(file,"iso-8859-1");
+      }
     }
   }
 
